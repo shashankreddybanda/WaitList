@@ -14,10 +14,10 @@ export default function Home() {
     return (
       <div className="flex items-center justify-center h-screen w-screen content-center ">
         <div className="flex flex-col gap-8 items-center">
-          <p>Create Event</p>
+          <p className=" text-6xl">Create an Event</p>
           <div className="flex gap-8">
-          <a href="/create" className=" border-2 px-8 py-4 min-w-fit hover:bg-gray-800 active:border-4">Create Event</a>
-          <a href="/api/auth/logout" className=" border-2 px-8 py-4 w-min hover:bg-gray-800 active:border-4">Logout</a>
+          <Link href="/create" className=" border-2 px-8 py-2 min-w-fit hover:bg-gray-800 active:border-4">Create</Link>
+          <Link href="/api/auth/logout" className=" border-2 px-8 py-2 w-min hover:bg-gray-800 active:border-4">Logout</Link>
           </div>
         </div>
       </div>

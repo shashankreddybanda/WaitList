@@ -25,3 +25,7 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+textarea:focus, input:focus{
+  outline: none;
+}
