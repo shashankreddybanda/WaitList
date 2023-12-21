@@ -18,7 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <UserProvider>
-        <body className={oswald.className}>{children}</body>
+        <body className={oswald.className}>
+          <div className="flex flex-col h-screen">
+          <header className='w-screen px-16 py-8 text-4xl'>Wait-list</header>
+          {children}
+          </div>
+          </body>
       </UserProvider>
     </html>
   )
