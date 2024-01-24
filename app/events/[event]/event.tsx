@@ -22,6 +22,8 @@ export default function Event({eventName, id}: { eventName: string, id:string })
     const {Canvas} = useQRCode()
     const pathName = usePathname()
 
+    const url = process.env.NEXT_PUBLIC_BASE_URL + `/events/${id}/join`
+
     return (
         <div className="p-16">
             <div className="border-2 rounded-md p-8 flex gap-8 flex-col">
@@ -33,9 +35,9 @@ export default function Event({eventName, id}: { eventName: string, id:string })
                     <Link href={`/events/${id}/join`}><Button>Join</Button></Link>
                 </div>
                 <Canvas
-                text={'https://github.com/bunlong/next-qrcode'}
+                text={url}
                 />
-                <span className="text-m">{pathName}</span>
+                <span className="text-m">{url}</span>
             </div>
         </div>
     )
