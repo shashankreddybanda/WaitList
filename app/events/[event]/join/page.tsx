@@ -1,10 +1,8 @@
-import { getEvent } from "@/actions/getEvent"
-import { getSession } from "@auth0/nextjs-auth0"
+import { getEventWithoutUser } from "@/actions/getEventWitoutUser"
 
 export default async function join({params} : {params : {event: string}}){
 
-    const user = await getSession()
-	const eventName = await getEvent(user, params.event)
+	const eventName = await getEventWithoutUser( params.event)
 
     if(eventName)
     return(
