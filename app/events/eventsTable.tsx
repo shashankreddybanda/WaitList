@@ -22,7 +22,7 @@ export default function EventsTable(data: any) {
             </TableHeader>
             <TableBody>
                 {events.map((event: any) => (
-                    <TableRow>
+                    <TableRow key={event.id}>
                         <TableCell>
                             <Link href={`/events/${event.id}`}>
                                 {event.name}
