@@ -20,7 +20,6 @@ export default function Event({eventName, id}: { eventName: string, id:string })
     }
 
     const {Canvas} = useQRCode()
-    const pathName = usePathname()
 
     const url = process.env.NEXT_PUBLIC_BASE_URL + `/events/${id}/join`
 
