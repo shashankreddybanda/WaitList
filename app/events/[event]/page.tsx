@@ -2,6 +2,7 @@ import { getEvent } from "@/actions/getEvent";
 import Event from "./event";
 import { getSession } from "@auth0/nextjs-auth0";
 
+
 export default async function page({ params }: { params: { event: string } }) {
 
     const user = await getSession()
@@ -10,7 +11,7 @@ export default async function page({ params }: { params: { event: string } }) {
     
     if(eventName)
     return (
-        <Event data={eventName}/>
+        <Event eventName={eventName} id={params.event}/>
     )
 
     return(
