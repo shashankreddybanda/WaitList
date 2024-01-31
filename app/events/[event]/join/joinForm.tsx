@@ -13,7 +13,7 @@ const formSchema = z.object({
     phone: z.string()
 })
 
-export default function joinForm() {
+export default function JoinForm() {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
