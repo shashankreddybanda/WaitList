@@ -1,26 +1,26 @@
-'use client'
-
 import { addEvent } from '@/actions/addEvent';
-import { useRef } from 'react';
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useUser } from '@auth0/nextjs-auth0/client';
+import { getSession } from '@auth0/nextjs-auth0';
+
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 
-export default function CreateForm() {
+export default async function CreateForm() {
 
-    const ref = useRef<HTMLFormElement>(null)
-    const { user, error, isLoading } = useUser();
+    const user = await getSession();
 
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>{error.message}</div>;
-
+    async function handleSubmit (formData: FormData) {
+        "use server"
+        await addEvent(formData,user);
+        revalidatePath("/events")
+        redirect('/events')
+    }
 
     return ( user &&
-        <div className="bg-gray-600 bg-opacity-50 p-16 flex gap-4">
-            <form ref={ref} action={async (formData) => {
-                ref.current?.reset();
-                await addEvent(formData,user);
-            }} className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 border-2 rounded-md p-8">
+            <form action={handleSubmit} className="flex flex-col gap-4">
                 <div>
                     <label>Event Name</label>
                     <div>
@@ -28,7 +28,7 @@ export default function CreateForm() {
                     </div>
                 </div>
 
-                <button type="submit" className="bg-white text-black py-2 px-3 w-min">Submit</button>
+                <Button type="submit" className="py-2 px-3 w-min">Submit</Button>
             </form>
         </div>
     )
