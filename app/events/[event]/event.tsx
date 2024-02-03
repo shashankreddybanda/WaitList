@@ -6,8 +6,10 @@ import { useQRCode } from "next-qrcode";
 import Link from "next/link";
 import { useState } from "react";
 import {usePathname} from "next/navigation"
+import AttendeesTable from "./attendeesTable";
+import QRDialog from "./qrDialog";
 
-export default function Event({eventName, id}: { eventName: string, id:string }) {
+export default function Event({eventName, id, attendees}: { eventName: string, id:string, attendees:any}) {
 
     const [isChecked, setIsChecked] = useState(false);
 
@@ -19,9 +21,7 @@ export default function Event({eventName, id}: { eventName: string, id:string })
 
     }
 
-    const {Canvas} = useQRCode()
-
-    const url = process.env.NEXT_PUBLIC_BASE_URL + `/events/${id}/join`
+    
 
     return (
         <div className="p-16">
@@ -30,13 +30,11 @@ export default function Event({eventName, id}: { eventName: string, id:string })
                     <h1 className="text-2xl">{eventName}</h1>
                     <Switch checked={isChecked} onCheckedChange={toggleEvent} />
                 </div>
-                <div className="flex item-center">
+                <div className="flex item-center justify-between">
+                    <QRDialog id={id}/>
                     <Link href={`/events/${id}/join`}><Button>Join</Button></Link>
                 </div>
-                <Canvas
-                text={url}
-                />
-                <span className="text-m">{url}</span>
+                <AttendeesTable attendees={attendees}/>
             </div>
         </div>
     )

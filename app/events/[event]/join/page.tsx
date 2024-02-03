@@ -12,7 +12,7 @@ export default async function join({ params }: { params: { event: string } }) {
                     <div>
                         <span className="text-xl">Enter details to join the wait-list: {eventName}</span>
                     </div>
-                    <JoinForm></JoinForm>
+                    <JoinForm event_id={params.event}/>
                 </div>
             </div>
         )

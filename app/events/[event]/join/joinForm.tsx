@@ -1,9 +1,11 @@
 "use client"
 
+import addAttendees from "@/actions/addAttendee"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { redirect, useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -13,7 +15,9 @@ const formSchema = z.object({
     phone: z.string()
 })
 
-export default function JoinForm() {
+export default function JoinForm({event_id}: {event_id:string}) {
+
+    const router = useRouter()
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -24,8 +28,11 @@ export default function JoinForm() {
         },
     })
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        console.log(values); 
+        
+        await addAttendees(values, event_id);
+         router.push(`/events/${event_id}`)
     }
 
     return (
