@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { getSession } from "@auth0/nextjs-auth0";
 import EventsTable from "./eventsTable";
 import { getEvents } from "@/actions/getEvents";
+import CreateForm from "./createForm";
 
 export default async function Events() {
 	const user = await getSession();
@@ -13,7 +14,7 @@ export default async function Events() {
 			<div className="flex justify-between">
 				<p className=" text-2xl">Events</p>
 				<Button asChild>
-					<Link href="/events/create">Create</Link>
+				<CreateForm/>
 				</Button>
 			</div>
 			<EventsTable data={events?.rows}/>
