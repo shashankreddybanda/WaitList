@@ -11,7 +11,5 @@ export async function addEvent(formData: FormData, user: Session|null|undefined)
         await sql`INSERT INTO Events (Name, Owner) VALUES (${name as string}, ${user?.user.email});`;
     } catch (error) {
         console.error(error);
-        
     }
-
 }
